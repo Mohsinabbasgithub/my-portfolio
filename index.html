@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mohsin Abbas — Portfolio</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- AOS (Animate on Scroll) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary: #4a90e2;
+      --secondary: #2ecc71;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1a202c;
+      --muted: #4a5568;
+      --gradient: linear-gradient(135deg, #4a90e2 0%, #2ecc71 100%);
+      --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --logo-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+
+    [data-theme="dark"]{
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #ffffff;
+      --muted: #e2e8f0;
+      --primary: #60a5fa;
+      --secondary: #34d399;
+      --gradient: linear-gradient(135deg, #60a5fa 0%, #34d399 100%);
+      --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --logo-shadow: 0 2px 12px rgba(0,0,0,0.35);
+    }
+
+    html,body{
+      height:100%;
+      background:var(--bg);
+      color:var(--text);
+      scroll-behavior:smooth;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    [data-theme="dark"] .navbar {
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-brand { 
+      font-weight: 700; 
+      letter-spacing: 0.3px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: var(--logo-shadow);
+      pointer-events: none;
+    }
+
+    .nav-link {
+      color: var(--text) !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      transition: all 0.3s ease;
+      position: relative;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.18);
+    }
+
+    .nav-link:hover {
+      color: var(--primary) !important;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: var(--gradient);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover::after {
+      width: 80%;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(74, 144, 226, 0.05) 0%, rgba(46, 204, 113, 0.05) 100%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient);
+      opacity: 0.02;
+      z-index: 0;
+    }
+
+    .hero > .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .headline { 
+      font-size: clamp(2rem, 4vw, 3rem); 
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+    }
+    .tagline { color:var(--muted); margin-bottom:1rem; }
+    /* Dark mode text styles */
+    [data-theme="dark"] p:not(.navbar-brand),
+    [data-theme="dark"] .muted,
+    [data-theme="dark"] li,
+    [data-theme="dark"] label,
+    [data-theme="dark"] .card-text,
+    [data-theme="dark"] .timeline div {
+      color: #ffffff !important;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.2);
+    }
+
+    [data-theme="dark"] a:not(.btn) {
+      color: var(--primary) !important;
+    }
+
+    [data-theme="dark"] .card {
+      background: rgba(30, 41, 59, 0.8) !important;
+    }
+
+    .skills .badge { 
+      font-weight: 600; 
+      margin: 0.25rem; 
+      padding: 0.8rem 1.2rem; 
+      border-radius: 12px;
+      background: rgba(74, 144, 226, 0.1); 
+      color: var(--text);
+      border: 1px solid rgba(74, 144, 226, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .skills .badge:hover {
+      transform: translateY(-2px);
+      background: var(--gradient);
+      color: white;
+      border-color: transparent;
+    }
+
+    [data-theme="dark"] .skills .badge { 
+      background: rgba(96, 165, 250, 0.1);
+      border-color: rgba(96, 165, 250, 0.2);
+    }
+
+    .project-card { 
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(74, 144, 226, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--card);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(10px);
+    }
+    
+    .carousel {
+      border-radius: 16px 16px 0 0;
+      overflow: hidden;
+    }
+    
+    .carousel-item img {
+      width: 100%;
+      height: auto;
+      max-height: 600px;
+      object-fit: contain;
+      background-color: var(--bg);
+    }
+    
+    @media (max-width: 768px) {
+      .carousel-item img {
+        max-height: 400px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .carousel-item img {
+        max-height: 300px;
+      }
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+      background: rgba(0,0,0,0.5);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: 0 1rem;
+    }
+    
+    .carousel-indicators {
+      margin-bottom: 0.5rem;
+    }
+    
+    .carousel-indicators button {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      opacity: 0.5;
+    }
+    
+    .carousel-indicators button.active {
+      opacity: 1;
+    }
+
+    .project-card:hover { 
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border-color: var(--primary);
+      border-width: 2px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 40%;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+
+    [data-theme="dark"] .project-card {
+      border-color: rgba(96, 165, 250, 0.1);
+    }
+
+    [data-theme="dark"] .project-card:hover {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .timeline { position:relative; padding-left:1.25rem; }
+    .timeline::before{ content:""; position:absolute; left:0.25rem; top:0; bottom:0; width:2px; background:linear-gradient(#ddd,#bbb); opacity:0.8; }
+
+    footer { padding:2rem 0; color:var(--muted); }
+
+    .theme-toggle {
+      border:1px solid rgba(0,0,0,0.1);
+      padding:0.5rem 1rem;
+      border-radius:999px;
+      background:transparent;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    [data-theme="dark"] .theme-toggle {
+      border-color: rgba(255,255,255,0.1);
+      color: #ffffff;
+    }
+
+    #themeText {
+      display: inline-block;
+      font-weight: 500;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .hero { 
+        padding: 4rem 0; 
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero { 
+        padding: 3.5rem 0;
+      }
+      .headline {
+        font-size: 2.5rem !important;
+      }
+      .theme-toggle {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+      }
+      .project-card {
+        margin-bottom: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .hero { 
+        padding: 3rem 0; 
+        text-align: center; 
+      }
+      .hero .col-md-6 { 
+        margin: 0 auto; 
+      }
+      .headline {
+        font-size: 2rem !important;
+      }
+      .nav-link {
+        text-align: center;
+        padding: 0.75rem !important;
+      }
+      .theme-toggle {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+      }
+      .skills .badge {
+        font-size: 0.8rem;
+        padding: 0.6rem 1rem;
+      }
+    }
+
+    /* small visual polish */
+    .section-title { margin-bottom:1rem; font-weight:700; letter-spacing:0.2px; }
+    .muted { color:var(--muted); font-size:0.95rem; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top" aria-label="Main navigation" style="backdrop-filter: blur(6px);">
+  <div class="container">
+    <a class="navbar-brand" href="#home">Mohsin Abbas</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item ms-3">
+          <button id="themeToggle" class="theme-toggle btn btn-sm d-flex align-items-center gap-2" aria-pressed="false" title="Toggle theme">
+            <i id="themeIcon" class="fa-regular fa-moon"></i>
+            <span id="themeText">Dark Mode</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO / HEADER -->
+<header id="home" class="hero">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6" data-aos="fade-right">
+        <p class="muted mb-2">Hi, I'm</p>
+        <h1 class="headline">Mohsin Abbas</h1>
+        <p class="tagline">Full-Stack Web Developer — MERN | WordPress | Real-time apps</p>
+
+        <p class="mb-3">Motivated Information Technology student specializing in full-stack web development with hands-on experience building scalable MERN stack applications and WordPress. Passionate about creating user-friendly solutions and learning new technologies.</p>
+
+        <div class="d-flex gap-2 flex-wrap">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-outline-secondary" href="#contact">Contact Me</a>
+        </div>
+
+        <div class="mt-4 d-flex gap-3 align-items-center">
+          <a class="text-decoration-none muted" href="https://www.linkedin.com/in/mohsinabbasbhatti/" target="_blank" rel="noopener">
+            <i class="fab fa-linkedin fa-lg"></i> <span class="ms-1">LinkedIn</span>
+          </a>
+          <a class="text-decoration-none muted" href="https://github.com/Mohsinabbasgithub" target="_blank" rel="noopener">
+            <i class="fab fa-github fa-lg"></i> <span class="ms-1">GitHub</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-5 offset-md-1" data-aos="fade-left">
+        <!-- Profile card -->
+        <div class="card p-4 project-card" style="background:var(--card); border: 1px solid rgba(74, 144, 226, 0.1);">
+          <div class="d-flex align-items-center">
+            <div class="position-relative me-4">
+              <div class="rounded-circle overflow-hidden" style="width: 120px; height: 120px; border: 3px solid transparent; background: var(--gradient); padding: 2px;">
+                <img src="WhatsApp Image 2025-08-11 at 21.40.44_8ee67ea9.jpg" alt="Mohsin Abbas" class="rounded-circle" width="100%" height="100%" style="object-fit: cover; background: var(--card);">
+            <div>
+              <h5 class="mb-0">Mohsin Abbas</h5>
+              <div class="muted">BS Information Technology (2021-2025)</div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="mb-2"><strong>Email:</strong> <a href="mailto:mohsinabbas55599@gmail.com">mohsinabbas55599@gmail.com</a></div>
+          <div class="mb-2"><strong>Phone:</strong> <a href="tel:+923091736516">+92-3091736516</a></div>
+
+          <div class="mt-3">
+            <small class="muted">Summary</small>
+            <p class="mb-0">Full-stack dev experienced with React, Node, MongoDB, Firebase and WordPress. Built MERN projects with real-time features and AI feedback integrations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="py-5">
+
+  <!-- ABOUT -->
+  <section id="about" class="container py-5" data-aos="fade-up">
+    <h2 class="section-title">About</h2>
+    <div class="row">
+      <div class="col-md-8">
+        <p>I'm a motivated Information Technology student at the University of the Punjab with practical experience building MERN stack applications and WordPress sites. I enjoy building scalable web apps, integrating real-time features (Socket.IO), and adding intelligent feedback using libraries like Sentiment.js. I’m continuously learning and taking on projects that solve real problems.</p>
+      </div>
+      <div class="col-md-4">
+        <ul class="list-unstyled muted">
+          <li><strong>Location:</strong> Lahore, Pakistan</li>
+          <li><strong>GPA:</strong> 2.92 / 4.00</li>
+          <li><strong>Availability:</strong> Internship / Junior Dev roles</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="container py-5" data-aos="fade-up">
+    <h2 class="section-title">Technical Skills</h2>
+    <p class="muted">Core tools and technologies I work with.</p>
+
+    <div class="row mt-3">
+      <div class="col-lg-6">
+        <h6 class="mb-2">Programming</h6>
+        <div class="skills">
+          <span class="badge">JavaScript</span>
+          <span class="badge">React.js</span>
+          <span class="badge">Node.js</span>
+          <span class="badge">Express.js</span>
+          <span class="badge">MongoDB</span>
+          <span class="badge">Firebase (Firestore)</span>
+          <span class="badge">REST APIs</span>
+          <span class="badge">JWT Authentication</span>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <h6 class="mb-2">Design & Tools</h6>
+        <div class="skills">
+          <span class="badge">Figma (UI/UX)</span>
+          <span class="badge">Socket.IO (Real-time)</span>
+          <span class="badge">Sentiment.js</span>
+          <span class="badge">WordPress</span>
+          <span class="badge">Elementor</span>
+          <span class="badge">Git & GitHub</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="container py-5" data-aos="fade-up">
+    <h2 class="section-title">Projects</h2>
+    <p class="muted">Selected projects — click to view (or update the links to your deployed apps / repos).</p>
+
+    <div class="row g-4 mt-3">
+      <!-- Featured Project -->
+      <div class="col-12" data-aos="zoom-in" data-aos-delay="50">
+        <div class="card project-card">
+          <div id="ridexCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#ridexCarousel" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#ridexCarousel" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#ridexCarousel" data-bs-slide-to="2"></button>
+              <button type="button" data-bs-target="#ridexCarousel" data-bs-slide-to="3"></button>
+              <button type="button" data-bs-target="#ridexCarousel" data-bs-slide-to="4"></button>
+              <button type="button" data-bs-target="#ridexCarousel" data-bs-slide-to="5"></button>
+              <button type="button" data-bs-target="#ridexCarousel" data-bs-slide-to="6"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="screencapture-localhost-3000-2025-05-13-01_07_38.png" class="d-block w-100" alt="RIDEX Homepage">
+              </div>
+              <div class="carousel-item">
+                <img src="screencapture-localhost-3000-SignupForm-2025-05-13-01_12_58.png" class="d-block w-100" alt="Signup Form">
+              </div>
+              <div class="carousel-item">
+                <img src="screencapture-localhost-3000-Signupregister-2025-05-13-01_10_27.png" class="d-block w-100" alt="Sign Up Registration">
+              </div>
+              <div class="carousel-item">
+                <img src="screencapture-localhost-3000-all-vehicles-2025-05-13-01_14_10.png" class="d-block w-100" alt="All Vehicles">
+              </div>
+              <div class="carousel-item">
+                <img src="screencapture-localhost-3000-driver-iAC2XDaZgvbTkbYr4Sc4QhWAs6D2-2025-05-13-01_15_39.png" class="d-block w-100" alt="Driver Dashboard">
+              </div>
+              <div class="carousel-item">
+                <img src="screencapture-localhost-3000-DriverVehicle-2025-05-13-01_21_22.png" class="d-block w-100" alt="Driver Vehicle Management">
+              </div>
+              <div class="carousel-item">
+                <img src="screencapture-localhost-3000-DriverRegistration-2025-05-13-01_24_53.png" class="d-block w-100" alt="Driver Registration">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#ridexCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#ridexCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">RIDEX — AI Powered Vehicle Rental</h5>
+            <p class="muted mb-2">Final Year Project — MERN stack web application</p>
+            <ul>
+              <li>Built a full MERN stack rental system with user and driver flows.</li>
+              <li>Integrated <strong>Socket.IO</strong> for real-time chat and Firebase for live data sync.</li>
+              <li>Used <strong>Sentiment.js</strong> to analyze user reviews for feedback insights.</li>
+              <li>Features include user registration, driver management, vehicle listings, and admin dashboard.</li>
+            </ul>
+            <div class="d-flex gap-2 mt-3">
+              <a class="btn btn-outline-primary btn-sm" href="https://github.com/Mohsinabbasgithub/fyp-project-ridex" target="_blank" rel="noopener">View Repo</a>
+              <a class="btn btn-primary btn-sm" href="https://ridex-57860.firebaseapp.com/" target="_blank" rel="noopener">Live Demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 (WordPress work) -->
+      <div class="col-md-6" data-aos="zoom-in" data-aos-delay="100">
+        <div class="card project-card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Dignitrix — WordPress E-commerce & Pages</h5>
+            <p class="muted mb-2">WordPress development for store workflows</p>
+            <ul>
+              <li>Developed WordPress sites to support Walmart store approval processes.</li>
+              <li>Designed responsive pages using Elementor and custom templates.</li>
+            </ul>
+            <div class="d-flex gap-2 mt-3">
+              <a class="btn btn-outline-primary btn-sm" href="https://ridex-57860.firebaseapp.com/" target="_blank" rel="noopener">View Work</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add more project cards as needed -->
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="container py-5" data-aos="fade-up">
+    <h2 class="section-title">Education</h2>
+
+    <div class="row mt-3">
+      <div class="col-md-8">
+        <div class="timeline p-3">
+          <div class="mb-4">
+            <h6 class="mb-1">BS in Information Technology <span class="muted"> (2021–2025)</span></h6>
+            <div class="muted">University of the Punjab, Lahore — GPA: 2.92 / 4.00</div>
+          </div>
+
+          <div class="mb-4">
+            <h6 class="mb-1">Intermediate in FSC Pre-Engineering <span class="muted"> (2019–2021)</span></h6>
+            <div class="muted">BISE Gujranwala Board</div>
+          </div>
+
+          <div>
+            <h6 class="mb-1">Courses & Certifications</h6>
+            <ul class="muted mb-0">
+              <li>Web Application Development in MERN Stack</li>
+              <li>WordPress (CodewithHarry)</li>
+              <li>Full Stack Development (WsCube Tech)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="container py-5" data-aos="fade-up">
+    <h2 class="section-title">Experience</h2>
+
+    <div class="row mt-3">
+      <div class="col-md-8">
+        <div class="card p-3" style="background:var(--card);">
+          <h6 class="mb-1">Dignitrix — Daska, Punjab, Pakistan <span class="muted"> (2021–2022)</span></h6>
+          <div class="muted">WordPress Developer</div>
+          <ul class="mt-2">
+            <li>Developed WordPress applications supporting Walmart store approval and new store setup workflows.</li>
+            <li>Utilized Elementor Page Builder to design responsive, user-friendly e-commerce pages.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="container py-5" data-aos="fade-up">
+    <h2 class="section-title">Contact</h2>
+    <p class="muted">Want to work together or see more of my work? Send a message below or use the links to reach me.</p>
+
+          
+          </div>
+        
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card p-4" style="background:var(--card);">
+          <h5>Get in touch</h5>
+          <p class="muted">Email: <a href="mailto:mohsinabbas55599@gmail.com">mohsinabbas55599@gmail.com</a></p>
+          <p class="muted">Phone: <a href="tel:+923091736516">+92-3091736516</a></p>
+          <p class="muted">Location: Lahore, Pakistan</p>
+
+          <hr>
+          <p class="mb-1"><strong>Quick links</strong></p>
+          <div class="d-flex gap-3">
+            <a class="text-decoration-none muted" href="https://www.linkedin.com/in/mohsinabbasbhatti/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a class="text-decoration-none muted" href="https://github.com/Mohsinabbasgithub" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="border-top">
+  <div class="container text-center py-3">
+    <div>© <strong>2025 Mohsin Abbas</strong> — Portfolio Full Stack Developer</div>
+  </div>
+</footer>
+
+<!-- JS: Bootstrap, AOS, and custom -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<script>
+  // Init AOS with enhanced animations
+  AOS.init({ 
+    duration: 1000,
+    once: true,
+    offset: 100,
+    easing: 'ease-out-cubic'
+  });
+
+  // Theme toggle: persists in localStorage
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const root = document.documentElement;
+
+  function setTheme(theme){
+    const themeText = document.getElementById('themeText');
+    if(theme === 'dark') {
+      root.setAttribute('data-theme','dark');
+      themeIcon.className = 'fa-solid fa-sun';
+      themeText.textContent = 'Light Mode';
+      themeToggle.setAttribute('aria-pressed','true');
+    } else {
+      root.removeAttribute('data-theme');
+      themeIcon.className = 'fa-regular fa-moon';
+      themeText.textContent = 'Dark Mode';
+      themeToggle.setAttribute('aria-pressed','false');
+    }
+    localStorage.setItem('portfolio_theme', theme);
+  }
+
+  // Load saved theme or system preference
+  (function(){
+    const saved = localStorage.getItem('portfolio_theme');
+    if(saved) setTheme(saved);
+    else {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(prefersDark ? 'dark' : 'light');
+    }
+  })();
+
+  themeToggle.addEventListener('click', () => {
+    const current = localStorage.getItem('portfolio_theme') === 'dark' ? 'dark' : 'light';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  // Contact form handler (mailto fallback)
+  const contactForm = document.getElementById('contactForm');
+  const clearBtn = document.getElementById('clearBtn');
+
+  contactForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const subject = encodeURIComponent('Portfolio contact from ' + name);
+    const body = encodeURIComponent('Name: ' + name + '\\nEmail: ' + email + '\\n\\n' + message);
+    // opens default mail client
+    window.location.href = `mailto:mohsinabbas55599@gmail.com?subject=${subject}&body=${body}`;
+  });
+
+  clearBtn.addEventListener('click', () => {
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('message').value = '';
+  });
+
+  // Smooth scroll for nav links (offset for sticky navbar)
+  document.querySelectorAll('a.nav-link').forEach(a => {
+    a.addEventListener('click', (e) => {
+      // default behavior anchor works; boost with smooth offset
+      // close navbar on mobile
+      const bsCollapse = document.querySelector('.navbar-collapse');
+      if (bsCollapse.classList.contains('show')) {
+        new bootstrap.Collapse(bsCollapse).hide();
+      }
+    });
+  });
+
+</script>
+</body>
+</html>
