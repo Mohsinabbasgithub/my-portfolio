@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # My Portfolio Website
 
 A modern, responsive portfolio website showcasing my work as a Full Stack Developer.
@@ -15,7 +14,6 @@ A modern, responsive portfolio website showcasing my work as a Full Stack Develo
 - HTML5
 - CSS3
 - JavaScript
-# my-portfolio
 
 A modern, responsive portfolio website showcasing my work as a Full Stack Developer.
 
